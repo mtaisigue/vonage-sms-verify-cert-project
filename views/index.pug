@@ -1,0 +1,19 @@
+extends layout.pug
+
+block content
+    h1 Welcome to #{brand}!
+    if number
+        p Your phone: #{number}
+        if role === 'user'
+            form(action='/chat', method='post')
+                input(type='hidden', name='user', value=number)
+                select.ghost-input(name='driver')
+                    each driver in drivers
+                        option(value=driver.number) #{driver.firstname} #{driver.lastname}
+                input.ghost-button(type='submit', value='Contact your driver')
+        a(href="logout")
+            button.ghost-button(type="button") Log out
+    else
+        p Please log in to continue...
+        a(href="login")
+            button.ghost-button(type="button") Log in
